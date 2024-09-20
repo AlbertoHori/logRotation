@@ -1,0 +1,2 @@
+# logRotation
+Dockerized Logrotate 
