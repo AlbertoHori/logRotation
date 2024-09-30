@@ -1,17 +1,28 @@
 FROM registry.access.redhat.com/ubi8/ubi:latest
+
+
 RUN yum update -y && \
     yum install -y logrotate && \
     yum clean all
 
-RUN mkdir -p /etc/logrotate.d
-RUN mkdir -p /var/lib/logrotate
-RUN chmod 755 /var/lib/logrotate
-RUN touch /var/lib/logrotate/logrotate.status
 
-# Create a logrotate config file
-RUN echo "/opt/apache/tomcat/base/logs/* {daily size 300M missingok rotate 5 compress delaycompress notifempty create}"> /etc/logrotate.d/logrotate.conf
+RUN mkdir -p /etc/logrotate.d \
+    && mkdir -p /var/lib/logrotate \
+    && chmod 755 /var/lib/logrotate \
+    && touch /var/lib/logrotate/logrotate.status \
+    && chmod 644 /var/lib/logrotate/logrotate.status
 
+
+RUN echo "/opt/apache/tomcat/base/logs/* {" > /etc/logrotate.d/logrotate.conf && \
+    echo "    daily" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    size 300M" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    missingok" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    rotate 5" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    compress" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    delaycompress" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    notifempty" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    create" >> /etc/logrotate.d/logrotate.conf && \
+    echo "}" >> /etc/logrotate.d/logrotate.conf
 
 
 CMD ["tail", "-f", "/dev/null"]
-
