@@ -13,15 +13,13 @@ RUN mkdir -p /etc/logrotate.d \
     && chmod 644 /var/lib/logrotate/logrotate.status
 
 
-RUN echo "/opt/apache/tomcat/base/logs/* {" > /etc/logrotate.d/logrotate.conf && \
-    echo "    daily" >> /etc/logrotate.d/logrotate.conf && \
-    echo "    size 300M" >> /etc/logrotate.d/logrotate.conf && \
+RUN echo "/opt/apache/tomcat/base/logs/catalina.out {" > /etc/logrotate.d/logrotate.conf && \
+    echo "    copytruncate" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    size 10M" >> /etc/logrotate.d/logrotate.conf && \
     echo "    missingok" >> /etc/logrotate.d/logrotate.conf && \
-    echo "    rotate 5" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    rotate 2" >> /etc/logrotate.d/logrotate.conf && \
     echo "    compress" >> /etc/logrotate.d/logrotate.conf && \
-    echo "    delaycompress" >> /etc/logrotate.d/logrotate.conf && \
-    echo "    notifempty" >> /etc/logrotate.d/logrotate.conf && \
-    echo "    create 644 root root" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    create 755 root root" >> /etc/logrotate.d/logrotate.conf && \
     echo "}" >> /etc/logrotate.d/logrotate.conf
 
 
