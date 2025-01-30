@@ -11,7 +11,7 @@ RUN mkdir -p /etc/logrotate.d \
     && chmod 755 /var/lib/logrotate \
     && touch /var/lib/logrotate/logrotate.status \
     && chmod 755 /var/lib/logrotate/logrotate.status \
-    && touch /etc/logroate.d/logrotate.conf
+    && touch /etc/logrotate.d/logrotate.conf
 
 
 RUN echo "/opt/apache/tomcat/base/logs/catalina.out {" > /etc/logrotate.d/logrotate.conf && \
