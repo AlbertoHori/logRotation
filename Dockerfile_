@@ -28,6 +28,9 @@ RUN echo "/opt/apache/tomcat/base/logs/catalina.out {" > /etc/logrotate.d/logrot
     echo "    rotate 2" >> /etc/logrotate.d/logrotate.conf && \
     echo "    compress" >> /etc/logrotate.d/logrotate.conf && \
     echo "    maxage 2" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    postrotate" >> /etc/logrotate.d/logrotate.conf && \
+    echo "        find /opt/apache/tomcat/base/logs/ -type f -mtime +5 -exec rm -f {} \;" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    endscript" >> /etc/logrotate.d/logrotate.conf && \
     echo "    create 755 root root" >> /etc/logrotate.d/logrotate.conf && \
     echo "}" >> /etc/logrotate.d/logrotate.conf
 
