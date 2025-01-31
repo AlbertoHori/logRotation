@@ -18,8 +18,17 @@ RUN echo "/opt/apache/tomcat/base/logs/catalina.out {" > /etc/logrotate.d/logrot
     echo "    copytruncate" >> /etc/logrotate.d/logrotate.conf && \
     echo "    size 10M" >> /etc/logrotate.d/logrotate.conf && \
     echo "    missingok" >> /etc/logrotate.d/logrotate.conf && \
-    echo "    rotate 2" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    rotate 5" >> /etc/logrotate.d/logrotate.conf && \
     echo "    compress" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    maxage 5" >> /etc/logrotate.d/logrotate.conf && \
+    echo "}" >> /etc/logrotate.d/logrotate.conf && \
+    echo "/opt/apache/tomcat/base/logs/*.txt {" > /etc/logrotate.d/logrotate.conf && \
+    echo "    copytruncate" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    size 10M" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    missingok" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    rotate 5" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    compress" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    maxage 5" >> /etc/logrotate.d/logrotate.conf && \
     echo "    create 755 root root" >> /etc/logrotate.d/logrotate.conf && \
     echo "}" >> /etc/logrotate.d/logrotate.conf
 
