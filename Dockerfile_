@@ -23,10 +23,10 @@ RUN echo "/opt/apache/tomcat/base/logs/catalina.out {" > /etc/logrotate.d/logrot
     echo "    maxage 7" >> /etc/logrotate.d/logrotate.conf && \
     echo "    notifempty" >> /etc/logrotate.d/logrotate.conf && \
     echo "    prerotate" >> /etc/logrotate.d/logrotate.conf && \
-    echo "         find /var/log/tomcat/ -name \"localhost_access_log.*.txt\" -size 0 -delete" >> /etc/logrotate.d/logrotate.conf && \
+    echo "         find /opt/apache/tomcat/base/logs -name \"localhost_access_log.*.txt\" -size 0 -delete" >> /etc/logrotate.d/logrotate.conf && \
     echo "    endscript" >> /etc/logrotate.d/logrotate.conf && \
     echo "    postrotate" >> /etc/logrotate.d/logrotate.conf && \
-    echo "         find /var/log/tomcat/ -name \"localhost_access_log.*.txt.*\" -size 0 -delete" >> /etc/logrotate.d/logrotate.conf && \
+    echo "         find /opt/apache/tomcat/base/logs -name \"localhost_access_log.*.txt.*\" -size 0 -delete" >> /etc/logrotate.d/logrotate.conf && \
     echo "    endscript" >> /etc/logrotate.d/logrotate.conf && \
     echo "    create 0755 root root" >> /etc/logrotate.d/logrotate.conf && \
 echo "}" >> /etc/logrotate.d/logrotate.conf
