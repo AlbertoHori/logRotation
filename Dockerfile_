@@ -8,17 +8,17 @@ RUN yum update -y && \
 
 RUN mkdir -p /etc/logrotate.d \
     && mkdir -p /var/lib/logrotate \
-    && chmod 755 /var/lib/logrotate \
+    && chmod 775 /var/lib/logrotate \
     && touch /var/lib/logrotate/logrotate.status \
-    && chmod 755 /var/lib/logrotate/logrotate.status \
+    && chmod 775 /var/lib/logrotate/logrotate.status \
     && touch /etc/logrotate.d/logrotate.conf
 
 
 RUN echo "/opt/apache/tomcat/base/logs/catalina.out {" > /etc/logrotate.d/logrotate.conf && \
     echo "    copytruncate" >> /etc/logrotate.d/logrotate.conf && \
-    echo "    size 1M" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    size 500M" >> /etc/logrotate.d/logrotate.conf && \
     echo "    missingok" >> /etc/logrotate.d/logrotate.conf && \
-    echo "    rotate 5" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    rotate 30" >> /etc/logrotate.d/logrotate.conf && \
     echo "    compress" >> /etc/logrotate.d/logrotate.conf && \
     echo "    maxage 7" >> /etc/logrotate.d/logrotate.conf && \
     echo "    notifempty" >> /etc/logrotate.d/logrotate.conf && \
@@ -28,7 +28,7 @@ RUN echo "/opt/apache/tomcat/base/logs/catalina.out {" > /etc/logrotate.d/logrot
     echo "    postrotate" >> /etc/logrotate.d/logrotate.conf && \
     echo "         find /opt/apache/tomcat/base/logs -name \"localhost_access_log.*.txt.*\" -size 0 -delete" >> /etc/logrotate.d/logrotate.conf && \
     echo "    endscript" >> /etc/logrotate.d/logrotate.conf && \
-    echo "    create 0755 root root" >> /etc/logrotate.d/logrotate.conf && \
+    echo "    create 0775 root root" >> /etc/logrotate.d/logrotate.conf && \
 echo "}" >> /etc/logrotate.d/logrotate.conf
 
 CMD ["tail", "-f", "/dev/null"]
